@@ -1,0 +1,4 @@
+<class name="resource/TestResource">
+    <name>Tom</name>
+    <age>35</age>
+</class>

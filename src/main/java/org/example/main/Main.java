@@ -13,6 +13,10 @@ import org.example.accountServer.AccountServerController;
 import org.example.accountServer.AccountServerControllerMBean;
 import org.example.accountServer.AccountServerImpl;
 import org.example.servlets.HomePageServlet;
+import org.example.servlets.ResourceServerServlet;
+import org.example.resource.ResourceServerController;
+import org.example.resource.ResourceServerControllerMBean;
+import org.example.resource.TestResource;
 
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
@@ -26,26 +30,28 @@ public class Main {
     static final Logger logger = LogManager.getLogger(Main.class.getName());
 
     public static void main( String[] args ) throws Exception {
-        if (args.length != 1) {
-            logger.error("Use port as first argument");
-            System.exit(1);
-        }
 
-        int port = Integer.parseInt(args[0]);
+        final int port = 8080;
 
         logger.info("Starting at localhost:" + port);
 
         AccountServer accountServer = new AccountServerImpl(10);
+        TestResource testResource = new TestResource();
 
         AccountServerControllerMBean serverStatistics = new AccountServerController(accountServer);
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-        ObjectName name = new ObjectName("Admin:type=AccountServerController.usersLimit");
+        ObjectName name = new ObjectName("Admin:type=AccountServerController");
         mbs.registerMBean(serverStatistics, name);
+
+        ResourceServerControllerMBean resourceServerController = new ResourceServerController(testResource);
+        ObjectName name1 = new ObjectName("Admin:type=ResourceServerController");
+        mbs.registerMBean(resourceServerController, name1);
 
         Server server = new Server(port);
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new HomePageServlet(accountServer)), HomePageServlet.PAGE_URL);
+        context.addServlet(new ServletHolder(new ResourceServerServlet(testResource)), ResourceServerServlet.RESOURCE_URL);
 
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setDirectoriesListed(true);
