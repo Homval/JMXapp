@@ -38,6 +38,8 @@ public class Main {
         AccountServer accountServer = new AccountServerImpl(10);
         TestResource testResource = new TestResource();
 
+        // JMX creating
+
         AccountServerControllerMBean serverStatistics = new AccountServerController(accountServer);
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         ObjectName name = new ObjectName("Admin:type=AccountServerController");
@@ -47,8 +49,12 @@ public class Main {
         ObjectName name1 = new ObjectName("Admin:type=ResourceServerController");
         mbs.registerMBean(resourceServerController, name1);
 
+
+        // Start server
+
         Server server = new Server(port);
 
+        // Servlet context creating
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new HomePageServlet(accountServer)), HomePageServlet.PAGE_URL);
         context.addServlet(new ServletHolder(new ResourceServerServlet(testResource)), ResourceServerServlet.RESOURCE_URL);

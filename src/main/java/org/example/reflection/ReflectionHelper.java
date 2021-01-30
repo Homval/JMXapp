@@ -1,12 +1,13 @@
 package org.example.reflection;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 
 public class ReflectionHelper {
     public static Object createInstance(String className) {
         try{
-            return Class.forName(className).newInstance();
-        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+            return Class.forName(className).getDeclaredConstructor().newInstance();
+        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return null;

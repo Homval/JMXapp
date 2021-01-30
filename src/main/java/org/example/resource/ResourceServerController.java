@@ -7,19 +7,15 @@ public class ResourceServerController implements ResourceServerControllerMBean{
         this.testResource = testResource;
     }
 
-    public TestResource getTestResource() {
-        return testResource;
-    }
-
     @Override
-    public String getResourceName(TestResource testResource) {
+    public String getResourceName() {
         String name = testResource.getName();
         System.out.println("ResourceName: " + name);
         return name;
     }
 
     @Override
-    public int getResourceAge(TestResource testResource) {
+    public int getResourceAge() {
         int age = testResource.getAge();
         System.out.println("Resource age: " + age);
         return age;

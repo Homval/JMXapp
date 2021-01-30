@@ -1,7 +1,5 @@
 package org.example.resource;
 
-import java.io.Serializable;
-
 public class TestResource{
     private String name;
     private int age;

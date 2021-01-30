@@ -17,9 +17,7 @@ public class ReadXMLFileSAX {
 
             return saxHandler.getObject();
 
-        } catch (ParserConfigurationException | IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
+        } catch (ParserConfigurationException | IOException | SAXException e) {
             e.printStackTrace();
         }
 
