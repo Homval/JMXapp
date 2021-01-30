@@ -1,4 +1,0 @@
-[01-18 22:49:34,257, 609] org.example.main.Main Starting at localhost:8080
-[01-18 22:49:34,587, 939] org.example.main.Main Server started
-[01-18 22:49:52,432, 18784] org.example.servlets.HomePageServlet UsersLimit: 10 UsersCount: 0
-[01-18 22:49:53,286, 19638] org.example.servlets.HomePageServlet UsersLimit: 10 UsersCount: 0
