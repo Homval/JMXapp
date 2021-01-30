@@ -1,21 +1,23 @@
-package org.example.resource;
+package org.example.resourceService;
 
-public class ResourceServerController implements ResourceServerControllerMBean{
+import org.example.resources.TestResource;
+
+public class ResourceService implements ResourceServiceMBean {
     private TestResource testResource;
 
-    public ResourceServerController(TestResource testResource) {
+    public ResourceService(TestResource testResource) {
         this.testResource = testResource;
     }
 
     @Override
-    public String getResourceName() {
+    public String getName() {
         String name = testResource.getName();
         System.out.println("ResourceName: " + name);
         return name;
     }
 
     @Override
-    public int getResourceAge() {
+    public int getAge() {
         int age = testResource.getAge();
         System.out.println("Resource age: " + age);
         return age;

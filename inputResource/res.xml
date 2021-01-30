@@ -1,4 +1,4 @@
-<class name="resource/TestResource">
+<class name="org.example.resources.TestResource">
     <name>Tom</name>
     <age>35</age>
 </class>

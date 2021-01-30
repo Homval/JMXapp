@@ -7,16 +7,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.sax.ReadXMLFileSAX;
-import org.example.resource.TestResource;
+import org.example.resources.TestResource;
 
 import java.io.IOException;
 
-public class ResourceServerServlet extends HttpServlet {
-    static final Logger logger = LogManager.getLogger(ResourceServerServlet.class.getName());
+public class ResourceServlet extends HttpServlet {
+    static final Logger logger = LogManager.getLogger(ResourceServlet.class.getName());
     public static final String RESOURCE_URL = "/resource";
     private final TestResource testResource;
 
-    public ResourceServerServlet(TestResource testResource) {
+    public ResourceServlet(TestResource testResource) {
         this.testResource = testResource;
     }
 

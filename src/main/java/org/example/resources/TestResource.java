@@ -1,4 +1,4 @@
-package org.example.resource;
+package org.example.resources;
 
 public class TestResource{
     private String name;

@@ -13,10 +13,10 @@ import org.example.accountServer.AccountServerController;
 import org.example.accountServer.AccountServerControllerMBean;
 import org.example.accountServer.AccountServerImpl;
 import org.example.servlets.HomePageServlet;
-import org.example.servlets.ResourceServerServlet;
-import org.example.resource.ResourceServerController;
-import org.example.resource.ResourceServerControllerMBean;
-import org.example.resource.TestResource;
+import org.example.servlets.ResourceServlet;
+import org.example.resourceService.ResourceService;
+import org.example.resourceService.ResourceServiceMBean;
+import org.example.resources.TestResource;
 
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
@@ -45,9 +45,9 @@ public class Main {
         ObjectName name = new ObjectName("Admin:type=AccountServerController");
         mbs.registerMBean(serverStatistics, name);
 
-        ResourceServerControllerMBean resourceServerController = new ResourceServerController(testResource);
+        ResourceServiceMBean resourceService = new ResourceService(testResource);
         ObjectName name1 = new ObjectName("Admin:type=ResourceServerController");
-        mbs.registerMBean(resourceServerController, name1);
+        mbs.registerMBean(resourceService, name1);
 
 
         // Start server
@@ -57,7 +57,7 @@ public class Main {
         // Servlet context creating
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new HomePageServlet(accountServer)), HomePageServlet.PAGE_URL);
-        context.addServlet(new ServletHolder(new ResourceServerServlet(testResource)), ResourceServerServlet.RESOURCE_URL);
+        context.addServlet(new ServletHolder(new ResourceServlet(testResource)), ResourceServlet.RESOURCE_URL);
 
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setDirectoriesListed(true);
